@@ -72,9 +72,9 @@
 
 |                               Icon                                |        Stack        | Description                        |
 | :---------------------------------------------------------------: | :-----------------: | ---------------------------------- |
-|      <img src = "./Doc/img/stackIcon/ec2.png" height = 30px>      |         EC2         | 배포 서버                          |
-|    <img src = "./Doc/img/stackIcon/route53.png" height = 30px>    |      ROUTE 53       | DNS와 EC2서버 연결                 |
-|      <img src = "./Doc/img/stackIcon/acm.png" height = 30px>      | CERTIFICATE MANAGER | SSL 인증서 생성                    |
+|      <img src = "./Doc/stackIcon/ec2.png" height = 30px>      |         EC2         | 배포 서버                          |
+|    <img src = "./Doc/stackIcon/route53.png" height = 30px>    |      ROUTE 53       | DNS와 EC2서버 연결                 |
+|      <img src = "./Doc/stackIcon/acm.png" height = 30px>      | CERTIFICATE MANAGER | SSL 인증서 생성                    |
 
 ## :construction:Architecture
 
