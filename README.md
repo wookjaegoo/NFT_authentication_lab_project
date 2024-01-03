@@ -65,7 +65,7 @@
 | :-----------------------------------------------------: | :------: | -------------------- |
 | <img src = "/Doc/stackIcon/Solidity.png" height = 25px> | SOLIDITY | 스마트 컨트랙트 작성 |
 | <img src = "/Doc/stackIcon/Truffle.png" height = 25px>  | TRUFFLE  | 스마트 컨트랙트 배포 |
-|  <img src = "/Doc/stackIcon/klaytn.png" height = 25px>  | ETHEREUM  | 블록체인 네트워크    |
+|  <img src = "/Doc/stackIcon/ethelogo.png" height = 25px>  | ETHEREUM  | 블록체인 네트워크    |
 | <img src = "/Doc/stackIcon/ganache.png" height = 25px>  | GANACHE  | 로컬에서 테스트      |
 
 ### Deploy
