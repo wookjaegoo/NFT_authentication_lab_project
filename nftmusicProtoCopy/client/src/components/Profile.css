@@ -1,0 +1,1151 @@
+/*
+
+All grid code is placed in a 'supports' rule (feature query) at the bottom of the CSS (Line 310). 
+        
+The 'supports' rule will only run if your browser supports CSS grid.
+
+Flexbox and floats are used as a fallback so that browsers which don't support grid will still recieve a similar layout.
+
+*/
+
+/* Base Styles */
+
+:root {
+  font-size: 10px;
+}
+
+.carousel {
+  position: absolute;
+  top: 20%;
+  left: 38%;
+  display: grid;
+  grid-column: 5/15;
+  grid-row: 2/9;
+  width: 50rem;
+  height: 10rem;
+  perspective: 500px;
+  transform-style: preserve-3d;
+}
+
+.card-container {
+  position: absolute;
+  display: grid;
+  grid-column: 5/13;
+  grid-row: 2/9;
+
+  transform: rotateY(calc(var(--offset) * 0.1deg))
+    scaleY(calc(1 + var(--abs-offset) * -0.01))
+    translateZ(calc(var(--abs-offset) * -30rem))
+    translateX(calc(var(--direction) * -0.1rem));
+
+  transition: all 0.3s ease-out;
+}
+
+.card {
+  width: 100%;
+  height: 100%;
+  padding: 2rem;
+  background-color: hsl(280deg, 40%, calc(100% - var(--abs-offset) * 50%));
+  border-radius: 1rem;
+  color: #9ca3af;
+  text-align: justify;
+  transition: all 0.3s ease-out;
+}
+.card h2 {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 0 0 0.7em;
+  color: #1f2937;
+}
+.card p,
+.card h2 {
+  transition: all 0.3s ease-out;
+  opacity: var(--active);
+}
+
+.nav {
+  color: white;
+  font-size: 5rem;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 50%;
+  z-index: 2;
+  cursor: pointer;
+  user-select: none;
+  background: unset;
+  border: unset;
+}
+.nav.left {
+  position: absolute;
+  top: 200%;
+  left: 10px;
+  transform: translateX(-100%) translatey(-50%);
+}
+.nav.right {
+  position: absolute;
+  top: 200%;
+  right: 10px;
+  transform: translateX(100%) translatey(-50%);
+}
+
+.Profile {
+  display: grid;
+  grid-column: 1/13;
+  grid-row: 2/9;
+
+  background: linear-gradient(45deg, #dfdee0, #eae9ec, #e6e2ee, #e8e2f3);
+  background-size: 400% 400%;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(0px);
+
+  font-family: 'Montserrat', sans-serif;
+}
+
+.QRcode {
+  display: grid;
+  grid-row: 2/8;
+  grid-column: 7/13;
+}
+
+.ProfileBlock {
+  width: 500px;
+  height: 500px;
+  display: block;
+}
+.wht-pre {
+  white-space: pre-wrap;
+}
+
+.contained {
+  margin-top: 80%;
+  color: white;
+}
+
+.Authentication {
+  margin-top: 30px;
+  color: black;
+  width: 500px;
+  display: grid;
+  grid-column: 7/13;
+  grid-row: 1/8;
+  align-content: center;
+  text-align: center;
+
+  box-sizing: border-box;
+  font-family: 'Cafe24Ssurround';
+
+  background: linear-gradient(-45deg, #00206d, #120a4d, #23a6d5, #23d5ab);
+  background-size: 400% 400%;
+  animation: AnimationName 15s ease infinite;
+
+  border-radius: 20px 20px 0 0;
+  height: 500px;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+}
+
+.prbottom {
+  position: relative;
+  bottom: -5px;
+  width: 500px;
+  background-color: white;
+  height: 70px;
+  border-radius: 0 0 20px 20px;
+}
+
+.prbottom2 {
+  position: relative;
+  bottom: -100%;
+
+  width: 500px;
+  background-color: white;
+  height: 90px;
+  border-radius: 0 0 20px 20px;
+}
+
+.prbottom3 {
+  position: relative;
+  bottom: -100px;
+  width: 500px;
+  background-color: white;
+  height: 110px;
+  border-radius: 0 0 20px 20px;
+}
+
+.Authentication2 {
+  color: black;
+
+  width: 500px;
+
+  display: grid;
+  grid-column: 7/13;
+  grid-row: 2/8;
+  align-content: center;
+  text-align: center;
+  box-sizing: border-box;
+  font-family: 'Cafe24Ssurround';
+
+  background: linear-gradient(-45deg, #00206d, #120a4d, #23a6d5, #23d5ab);
+  background-size: 400% 400%;
+  animation: AnimationName 15s ease infinite;
+
+  border-radius: 20px 20px 0 0;
+  height: 500px;
+  align-items: center;
+  justify-content: center;
+}
+
+.Authentication3 {
+  color: white;
+  width: 500px;
+  height: 500px;
+  align-content: center;
+  display: grid;
+  grid-column: 7/13;
+  grid-row: 2/8;
+  text-align: left;
+  box-sizing: border-box;
+  font-family: 'Cafe24Ssurround';
+  background: linear-gradient(-45deg, #00206d, #120a4d, #23a6d5, #23d5ab);
+  background-size: 400% 400%;
+  animation: AnimationName 15s ease infinite;
+  z-index: 100;
+  border-radius: 20px 20px 20px 20px;
+
+  position: relative;
+}
+
+.animatedimage {
+  width: 120px;
+}
+
+@media all and (min-width: 840px) and (max-width: 1000px) {
+  .animatedimage {
+    width: 100px;
+  }
+
+  .carousel {
+    position: absolute;
+    top: 15%;
+    left: 30%;
+    display: grid;
+    grid-column: 5/14;
+    grid-row: 2/9;
+    width: 33rem;
+  }
+
+  .card-container {
+    margin-left: 15px;
+  }
+
+  .dicbar {
+    width: 300px;
+    position: absolute;
+    top: 30px;
+  }
+  .dicbar img {
+    width: 150px;
+  }
+
+  .Authentication {
+    margin-top: 30px;
+
+    width: 305px;
+    height: 300px;
+  }
+
+  .Authentication2 {
+    width: 303px;
+    height: 350px;
+  }
+  .Authentication3 {
+    margin-top: 30px;
+    width: 303px;
+    height: 430px;
+    font-size: 8px;
+  }
+
+  .prbottom {
+    width: 303px;
+  }
+  .prbottom2 {
+    width: 303px;
+    bottom: -3px;
+  }
+
+  .prbottom3 {
+    width: 303px;
+  }
+
+  .Procedure {
+    color: black;
+    height: 500px;
+    width: 300px;
+
+    display: grid;
+
+    grid-column: 7/13;
+    grid-row: 2/8;
+    align-content: center;
+    text-align: center;
+
+    box-sizing: border-box;
+    font-family: 'Cafe24Ssurround';
+  }
+
+  .container {
+    background: linear-gradient(-45deg, #00206d, #120a4d, #23a6d5, #23d5ab);
+    background-size: 400% 400%;
+    animation: AnimationName 15s ease infinite;
+
+    border-radius: 20px 20px 0 0;
+    height: 550px;
+    width: 300px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+  }
+
+  .ProDetail1 {
+    position: relative;
+    height: 90px;
+    background-color: white;
+    border-radius: 0 0 20px 20px;
+    width: 300px;
+  }
+
+  .ProDetail2 {
+    width: 280px;
+    margin-left: 10px;
+  }
+  .contained {
+    margin-top: 245px;
+  }
+}
+
+@media all and (min-width: 672px) and (max-width: 839px) {
+  .animatedimage {
+    width: 100px;
+  }
+
+  .carousel {
+    position: absolute;
+    top: 15%;
+    left: 25%;
+    display: grid;
+    grid-column: 5/14;
+    grid-row: 2/9;
+    width: 33rem;
+  }
+
+  .card-container {
+    margin-left: 15px;
+  }
+
+  .dicbar {
+    width: 300px;
+    position: absolute;
+    top: 30px;
+  }
+  .dicbar img {
+    width: 150px;
+  }
+
+  .Authentication {
+    margin-top: 30px;
+
+    width: 305px;
+    height: 300px;
+  }
+
+  .Authentication2 {
+    width: 303px;
+    height: 350px;
+  }
+  .Authentication3 {
+    margin-top: 30px;
+    width: 303px;
+    height: 430px;
+    font-size: 8px;
+  }
+
+  .prbottom {
+    width: 303px;
+  }
+  .prbottom2 {
+    width: 303px;
+    bottom: -3px;
+  }
+
+  .prbottom3 {
+    width: 303px;
+  }
+
+  .Procedure {
+    color: black;
+    height: 500px;
+    width: 300px;
+
+    display: grid;
+
+    grid-column: 7/13;
+    grid-row: 2/8;
+    align-content: center;
+    text-align: center;
+
+    box-sizing: border-box;
+    font-family: 'Cafe24Ssurround';
+  }
+
+  .container {
+    background: linear-gradient(-45deg, #00206d, #120a4d, #23a6d5, #23d5ab);
+    background-size: 400% 400%;
+    animation: AnimationName 15s ease infinite;
+
+    border-radius: 20px 20px 0 0;
+    height: 550px;
+    width: 300px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+  }
+
+  .ProDetail1 {
+    position: relative;
+    height: 90px;
+    background-color: white;
+    border-radius: 0 0 20px 20px;
+    width: 300px;
+  }
+
+  .ProDetail2 {
+    width: 280px;
+    margin-left: 10px;
+  }
+  .contained {
+    margin-top: 245px;
+  }
+}
+
+@media all and (min-width: 512px) and (max-width: 671px) {
+  .animatedimage {
+    width: 100px;
+  }
+
+  .carousel {
+    position: absolute;
+    top: 15%;
+    left: 15%;
+    display: grid;
+    grid-column: 5/14;
+    grid-row: 2/9;
+    width: 33rem;
+  }
+
+  .card-container {
+    margin-left: 15px;
+  }
+
+  .dicbar {
+    width: 300px;
+    position: absolute;
+    top: 30px;
+  }
+  .dicbar img {
+    width: 150px;
+  }
+
+  .Authentication {
+    margin-top: 30px;
+
+    width: 305px;
+    height: 300px;
+  }
+
+  .Authentication2 {
+    width: 303px;
+    height: 350px;
+  }
+  .Authentication3 {
+    margin-top: 30px;
+    width: 303px;
+    height: 430px;
+    font-size: 8px;
+  }
+
+  .prbottom {
+    width: 303px;
+  }
+  .prbottom2 {
+    width: 303px;
+    bottom: -3px;
+  }
+
+  .prbottom3 {
+    width: 303px;
+  }
+
+  .Procedure {
+    color: black;
+    height: 500px;
+    width: 300px;
+
+    display: grid;
+
+    grid-column: 7/13;
+    grid-row: 2/8;
+    align-content: center;
+    text-align: center;
+
+    box-sizing: border-box;
+    font-family: 'Cafe24Ssurround';
+  }
+
+  .container {
+    background: linear-gradient(-45deg, #00206d, #120a4d, #23a6d5, #23d5ab);
+    background-size: 400% 400%;
+    animation: AnimationName 15s ease infinite;
+
+    border-radius: 20px 20px 0 0;
+    height: 550px;
+    width: 300px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+  }
+
+  .ProDetail1 {
+    position: relative;
+    height: 90px;
+    background-color: white;
+    border-radius: 0 0 20px 20px;
+    width: 300px;
+  }
+
+  .ProDetail2 {
+    width: 280px;
+    margin-left: 10px;
+  }
+  .contained {
+    margin-top: 245px;
+  }
+}
+
+@media all and (min-width: 480px) and (max-width: 511px) {
+  .animatedimage {
+    width: 100px;
+  }
+
+  .Profile {
+    position: relative;
+    width: 480px;
+  }
+
+  .nav.left {
+    position: absolute;
+    top: 105%;
+    left: 20px;
+  }
+  .nav.right {
+    position: absolute;
+    top: 105%;
+    right: 20px;
+  }
+
+  .carousel {
+    position: absolute;
+    top: 15%;
+    left: 15%;
+    display: grid;
+    grid-column: 2/14;
+    grid-row: 2/9;
+    width: 33rem;
+  }
+
+  .card-container {
+    margin-left: 15px;
+  }
+
+  .dicbar {
+    width: 300px;
+    position: absolute;
+    top: 30px;
+  }
+  .dicbar img {
+    width: 150px;
+  }
+
+  .Authentication {
+    margin-top: 30px;
+
+    width: 305px;
+    height: 300px;
+  }
+
+  .Authentication2 {
+    width: 303px;
+    height: 350px;
+  }
+  .Authentication3 {
+    margin-top: 30px;
+    width: 303px;
+    height: 430px;
+    font-size: 8px;
+  }
+
+  .prbottom {
+    width: 303px;
+  }
+  .prbottom2 {
+    width: 303px;
+    bottom: -3px;
+  }
+
+  .prbottom3 {
+    width: 303px;
+  }
+
+  .Procedure {
+    color: black;
+    height: 500px;
+    width: 300px;
+
+    display: grid;
+
+    grid-column: 7/13;
+    grid-row: 2/8;
+    align-content: center;
+    text-align: center;
+
+    box-sizing: border-box;
+    font-family: 'Cafe24Ssurround';
+  }
+
+  .container {
+    background: linear-gradient(-45deg, #00206d, #120a4d, #23a6d5, #23d5ab);
+    background-size: 400% 400%;
+    animation: AnimationName 15s ease infinite;
+
+    border-radius: 20px 20px 0 0;
+    height: 550px;
+    width: 300px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+  }
+
+  .ProDetail1 {
+    position: relative;
+    height: 90px;
+    background-color: white;
+    border-radius: 0 0 20px 20px;
+    width: 300px;
+  }
+
+  .ProDetail2 {
+    width: 280px;
+    margin-left: 10px;
+  }
+  .contained {
+    margin-top: 245px;
+  }
+}
+
+@media all and (min-width: 412px) and (max-width: 479px) {
+  .animatedimage {
+    width: 100px;
+  }
+
+  .Profile {
+    position: relative;
+    width: 412px;
+  }
+
+  .nav.left {
+    position: absolute;
+    top: 105%;
+    left: 20px;
+  }
+  .nav.right {
+    position: absolute;
+    top: 105%;
+    right: 20px;
+  }
+
+  .carousel {
+    position: absolute;
+    top: 15%;
+    left: 10%;
+    display: grid;
+    grid-column: 2/14;
+    grid-row: 2/9;
+    width: 33rem;
+  }
+
+  .card-container {
+    margin-left: 15px;
+  }
+
+  .dicbar {
+    width: 300px;
+    position: absolute;
+    top: 30px;
+  }
+  .dicbar img {
+    width: 150px;
+  }
+
+  .Authentication {
+    margin-top: 30px;
+
+    width: 305px;
+    height: 300px;
+  }
+
+  .Authentication2 {
+    margin-top: 30px;
+    width: 303px;
+    height: 300px;
+  }
+  .Authentication3 {
+    margin-top: 30px;
+    width: 303px;
+    height: 430px;
+    font-size: 8px;
+  }
+
+  .prbottom {
+    width: 303px;
+  }
+  .prbottom2 {
+    width: 303px;
+    bottom: -3px;
+  }
+
+  .prbottom3 {
+    width: 303px;
+  }
+
+  .Procedure {
+    color: black;
+    height: 500px;
+    width: 300px;
+
+    display: grid;
+
+    grid-column: 7/13;
+    grid-row: 2/8;
+    align-content: center;
+    text-align: center;
+
+    box-sizing: border-box;
+    font-family: 'Cafe24Ssurround';
+  }
+
+  .container {
+    background: linear-gradient(-45deg, #00206d, #120a4d, #23a6d5, #23d5ab);
+    background-size: 400% 400%;
+    animation: AnimationName 15s ease infinite;
+
+    border-radius: 20px 20px 0 0;
+    height: 550px;
+    width: 300px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+  }
+
+  .ProDetail1 {
+    position: relative;
+    height: 90px;
+    background-color: white;
+    border-radius: 0 0 20px 20px;
+    width: 300px;
+  }
+
+  .ProDetail2 {
+    width: 280px;
+    margin-left: 10px;
+  }
+  .contained {
+    margin-top: 245px;
+  }
+}
+
+@media all and (min-width: 390px) and (max-width: 411px) {
+  .animatedimage {
+    width: 100px;
+  }
+  .Profile {
+    position: relative;
+    width: 390px;
+  }
+  .nav.left {
+    position: absolute;
+    top: 105%;
+    left: 20px;
+  }
+  .nav.right {
+    position: absolute;
+    top: 105%;
+    right: 20px;
+  }
+
+  .carousel {
+    position: absolute;
+    top: 15%;
+    left: 8%;
+    display: grid;
+    grid-column: 2/14;
+    grid-row: 2/9;
+    width: 33rem;
+  }
+
+  .card-container {
+    margin-left: 15px;
+  }
+
+  .dicbar {
+    position: absolute;
+    top: 30px;
+    width: 300px;
+  }
+  .dicbar img {
+    width: 150px;
+  }
+
+  .Authentication {
+    margin-top: 30px;
+
+    width: 303px;
+    height: 300px;
+  }
+
+  .Authentication2 {
+    margin-top: 30px;
+    width: 303px;
+    height: 300px;
+  }
+  .Authentication3 {
+    margin-top: 30px;
+    width: 303px;
+    height: 430px;
+    font-size: 8px;
+  }
+
+  .prbottom {
+    width: 303px;
+  }
+  .prbottom2 {
+    width: 303px;
+    bottom: -1px;
+  }
+
+  .prbottom3 {
+    width: 303px;
+  }
+
+  .Procedure {
+    color: black;
+    height: 500px;
+    width: 300px;
+
+    display: grid;
+
+    grid-column: 7/13;
+    grid-row: 2/8;
+    align-content: center;
+    text-align: center;
+
+    box-sizing: border-box;
+    font-family: 'Cafe24Ssurround';
+  }
+
+  .container {
+    background: linear-gradient(-45deg, #00206d, #120a4d, #23a6d5, #23d5ab);
+    background-size: 400% 400%;
+    animation: AnimationName 15s ease infinite;
+
+    border-radius: 20px 20px 0 0;
+    height: 500px;
+    width: 300px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+  }
+
+  .ProDetail1 {
+    position: relative;
+    height: 90px;
+    background-color: white;
+    border-radius: 0 0 20px 20px;
+    width: 300px;
+  }
+
+  .ProDetail2 {
+    width: 280px;
+    margin-left: 10px;
+  }
+  .contained {
+    margin-top: 200px;
+  }
+}
+
+@media all and (min-width: 360px) and (max-width: 389px) {
+  .animatedimage {
+    width: 100px;
+  }
+  .Profile {
+    position: relative;
+    width: 360px;
+  }
+  .nav.left {
+    position: absolute;
+    top: 105%;
+    left: 30px;
+  }
+  .nav.right {
+    position: absolute;
+    top: 105%;
+    right: 1px;
+  }
+
+  .carousel {
+    position: absolute;
+    top: 15%;
+    left: 5%;
+    display: grid;
+    grid-column: 2/14;
+    grid-row: 2/9;
+    width: 30rem;
+  }
+
+  .card-container {
+    margin-left: 15px;
+  }
+
+  .dicbar {
+    position: absolute;
+    top: 30px;
+    width: 300px;
+  }
+  .dicbar img {
+    width: 150px;
+  }
+
+  .Authentication {
+    margin-top: 30px;
+
+    width: 300px;
+    height: 300px;
+  }
+
+  .Authentication2 {
+    margin-top: 30px;
+    width: 300px;
+    height: 300px;
+  }
+  .Authentication3 {
+    margin-top: 30px;
+    width: 300px;
+    height: 430px;
+    font-size: 8px;
+  }
+
+  .prbottom {
+    width: 300px;
+  }
+  .prbottom2 {
+    width: 300px;
+    bottom: -3px;
+  }
+
+  .prbottom3 {
+    width: 300px;
+  }
+
+  .Procedure {
+    color: black;
+    height: 500px;
+    width: 300px;
+
+    display: grid;
+
+    grid-column: 7/13;
+    grid-row: 2/8;
+    align-content: center;
+    text-align: center;
+
+    box-sizing: border-box;
+    font-family: 'Cafe24Ssurround';
+  }
+
+  .container {
+    background: linear-gradient(-45deg, #00206d, #120a4d, #23a6d5, #23d5ab);
+    background-size: 400% 400%;
+    animation: AnimationName 15s ease infinite;
+
+    border-radius: 20px 20px 0 0;
+    height: 500px;
+    width: 300px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+  }
+
+  .ProDetail1 {
+    position: relative;
+    height: 90px;
+    background-color: white;
+    border-radius: 0 0 20px 20px;
+    width: 300px;
+  }
+
+  .ProDetail2 {
+    width: 280px;
+    margin-left: 10px;
+  }
+  .contained {
+    margin-top: 200px;
+  }
+}
+
+@media all and (min-width: 300px) and (max-width: 359px) {
+  .animatedimage {
+    width: 100px;
+  }
+  .Profile {
+    position: relative;
+    width: 320px;
+  }
+  .nav.left {
+    position: absolute;
+    top: 105%;
+    left: 30px;
+  }
+  .nav.right {
+    position: absolute;
+    top: 105%;
+    right: 40px;
+  }
+
+  .carousel {
+    position: absolute;
+    top: 15%;
+    left: 5%;
+    display: grid;
+    grid-column: 2/14;
+    grid-row: 2/9;
+    width: 30rem;
+  }
+
+  .card-container {
+    margin-left: 15px;
+  }
+
+  .dicbar {
+    position: absolute;
+    top: 30px;
+    width: 260px;
+  }
+  .dicbar img {
+    width: 150px;
+  }
+
+  .Authentication {
+    margin-top: 30px;
+
+    width: 260px;
+    height: 300px;
+  }
+
+  .Authentication2 {
+    margin-top: 30px;
+    width: 260px;
+    height: 300px;
+  }
+  .Authentication3 {
+    margin-top: 30px;
+    width: 260px;
+    height: 430px;
+    font-size: 8px;
+  }
+
+  .prbottom {
+    width: 260px;
+  }
+  .prbottom2 {
+    width: 260px;
+    bottom: -3px;
+  }
+
+  .prbottom3 {
+    width: 260px;
+  }
+
+  .Procedure {
+    color: black;
+    height: 500px;
+    width: 300px;
+
+    display: grid;
+
+    grid-column: 7/13;
+    grid-row: 2/8;
+    align-content: center;
+    text-align: center;
+
+    box-sizing: border-box;
+    font-family: 'Cafe24Ssurround';
+  }
+
+  .container {
+    background: linear-gradient(-45deg, #00206d, #120a4d, #23a6d5, #23d5ab);
+    background-size: 400% 400%;
+    animation: AnimationName 15s ease infinite;
+
+    border-radius: 20px 20px 0 0;
+    height: 500px;
+    width: 300px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+  }
+
+  .ProDetail1 {
+    position: relative;
+    height: 90px;
+    background-color: white;
+    border-radius: 0 0 20px 20px;
+    width: 300px;
+  }
+
+  .ProDetail2 {
+    width: 280px;
+    margin-left: 10px;
+  }
+  .contained {
+    margin-top: 200px;
+  }
+}

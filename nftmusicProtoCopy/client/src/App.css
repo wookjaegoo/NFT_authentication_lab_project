@@ -1,0 +1,92 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.Home,
+.Deploy,
+.sign-up {
+  display: flex;
+  height: 90vh;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+}
+
+.Deploy {
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  position: relative;
+  color: #fff;
+  font-size: 50px;
+}
+
+.Home {
+  /* background-image: url('/src/images/img-1.jpg'); */
+  background-position: center;
+  background-size: fill;
+  background-repeat: no-repeat;
+  color: #fff;
+  font-size: 100px;
+}
+
+.sign-up {
+  /* background-image: url('/src/images/img-8.jpg'); */
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  color: #fff;
+  font-size: 100px;
+}
+
+#App {
+  display: grid;
+}
+
+.loading {
+  display: grid;
+  grid-column: 1/13;
+  grid-row: 1/9;
+}
+
+.Bottom {
+  background-color: white;
+  color: black;
+
+  position: sticky;
+  grid-column: 1/13;
+  grid-row: 9/9;
+}
+
+@media all and (min-width: 480px) and (max-width: 511px) {
+  .Bottom {
+    width: 480px;
+  }
+}
+
+@media all and (min-width: 412px) and (max-width: 479px) {
+  .Bottom {
+    width: 412px;
+  }
+}
+@media all and (min-width: 390px) and (max-width: 411px) {
+  .Bottom {
+    width: 390px;
+  }
+}
+@media all and (min-width: 360px) and (max-width: 389px) {
+  .Bottom {
+    width: 360px;
+  }
+}
+
+@media all and (min-width: 300px) and (max-width: 359px) {
+  .Bottom {
+    width: 320px;
+  }
+}
