@@ -173,7 +173,12 @@ pragma solidity ^0.8.0;
 
 ### 시연영상 - 계정지갑연결
 https://github.com/wookjaegoo/NFT_authentication_lab_project/assets/87640934/ff798681-9062-44ce-9ba8-dfef6720f2c8
-### 시연영상 - 등록 및 조회과정
+### 시연영상 - 등록과정
+https://github.com/wookjaegoo/NFT_authentication_lab_project/assets/87640934/924a3ae5-7f07-4c83-ac2b-ff5a1ae20986
+### 시연영상 - 조회과정1
+https://github.com/wookjaegoo/NFT_authentication_lab_project/assets/87640934/e64e894f-00e1-42c9-977d-d1d8d76ce890
+### 시연영상 - 조회과정2
+https://github.com/wookjaegoo/NFT_authentication_lab_project/assets/87640934/df9d58a2-986d-4cbd-96cd-432ad3522b2e
 
 
 
