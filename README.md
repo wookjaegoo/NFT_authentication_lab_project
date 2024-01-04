@@ -90,23 +90,7 @@
 
 # :computer: 제공 기능 (Service)
 
-<div>
-<!-- 홈화면 이미지 -->
-<img src="/Doc/img/image02.png" alt="홈화면" width="200" height="400">
-
-<!-- 정보 등록 이미지 -->
-<img src="/Doc/img/image03.png" alt="음원업로드" width="200" height="400">
-
-<!-- 정보 기입후 업로드 -->
-<img src="/Doc/img/image04.png" alt="마이페이지" width="200" height="400">
-
-</div>
-
-사용자의 교육경력 및 개인정보를 입력할 수 있다. 
-
-인증서 업로드 버튼을 클릭하면 사용자의 트랜잭션 서명 이벤트가 발생한다. 
-
-
+## 가상화폐지갑연결
 <div>
 <!-- web3 wallet connect -->
 <img src="/Doc/img/image05.png" alt="가상화폐 지갑연결" width="200" height="400">
@@ -123,7 +107,24 @@
 
 
 
+## 정보등록절차
+<div>
+<!-- 홈화면 이미지 -->
+<img src="/Doc/img/image02.png" alt="홈화면" width="200" height="400">
 
+<!-- 정보 등록 이미지 -->
+<img src="/Doc/img/image03.png" alt="음원업로드" width="200" height="400">
+
+<!-- 정보 기입후 업로드 -->
+<img src="/Doc/img/image04.png" alt="마이페이지" width="200" height="400">
+
+</div>
+
+사용자의 교육경력 및 개인정보를 입력할 수 있다. 
+
+인증서 업로드 버튼을 클릭하면 사용자의 트랜잭션 서명 이벤트가 발생한다. 
+
+## 정보조회절차
 <div>
 <!-- 동적qr정보조회 -->
 <img src="/Doc/img/image17.png" alt="동적qr정보조회" width="200" height="400">
