@@ -169,12 +169,14 @@ pragma solidity ^0.8.0;
     }
 
 사용자의 정보를 조회할때는 tokenId를 입력하여 ipfs에 기록된 정보를 조회한다.
-
+```
 
 ### 시연영상 - 계정지갑연결
-
-
+https://github.com/wookjaegoo/NFT_authentication_lab_project/assets/87640934/ff798681-9062-44ce-9ba8-dfef6720f2c8
 ### 시연영상 - 등록 및 조회과정
+
+
+
 
 
 
