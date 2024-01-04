@@ -144,9 +144,8 @@
 
 동적qr을 조회하면 사용자가 블록체인에 기록했던 정보를 조회할 수 있다.
 
----
 
-### SmartContract
+# SmartContract
 
 ```solidity
 // 예시 솔리디티 코드
@@ -182,9 +181,8 @@ https://github.com/wookjaegoo/NFT_authentication_lab_project/assets/87640934/e64
 ### 시연영상-조회과정2
 https://github.com/wookjaegoo/NFT_authentication_lab_project/assets/87640934/df9d58a2-986d-4cbd-96cd-432ad3522b2e
 
----
 
-## 프로젝트후기
+# 프로젝트후기
 walletconnectModal을 사용하여 모바일 반응형 웹에서 블록체인 네트워크와 통신할 수 있음을 깨달았다. 그러나 사용자 측면에서
 일반적인 검색엔진이 아닌 메타마스크와같은 가상화폐 어플리케이션에 탑재된 브라우저를 사용하여 도메인에 접근해야 하는 단점이 
 있다. 접근성이 매우 떨어지는 것을 느꼈으며 차라리 백엔드 단을 구성하여 사용자의 지갑 정보를 구성하는 것이 접근성을 낮출 것이라고 판단하였다.
