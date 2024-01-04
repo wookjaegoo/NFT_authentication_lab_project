@@ -144,6 +144,7 @@
 
 동적qr을 조회하면 사용자가 블록체인에 기록했던 정보를 조회할 수 있다.
 
+---
 
 ### SmartContract
 
@@ -181,6 +182,7 @@ https://github.com/wookjaegoo/NFT_authentication_lab_project/assets/87640934/e64
 ### 시연영상-조회과정2
 https://github.com/wookjaegoo/NFT_authentication_lab_project/assets/87640934/df9d58a2-986d-4cbd-96cd-432ad3522b2e
 
+---
 
 ## 프로젝트후기
 walletconnectModal을 사용하여 모바일 반응형 웹에서 블록체인 네트워크와 통신할 수 있음을 깨달았다. 그러나 사용자 측면에서
