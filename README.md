@@ -1,4 +1,4 @@
-# klaytn music
+# NFT Authentication
 
 # :books: 목차
 
@@ -16,12 +16,17 @@
     - [**FrontEnd**](#frontend)
     - [**BackEnd**](#backend)
     - [**Smart Contract**](#smart-contract)
-    <!-- - [**Deploy**](#deploy) -->
+    - [**Deploy**](#deploy)
 
-    <!-- - [Deploy :rocket:](#deploy-rocket) -->
+    - [Deploy :rocket:](#deploy-rocket)
     <!-- - [Connect](#connect) -->
 
 - [:computer: 제공 기능 (Service)](#computer-제공-기능-service)
+
+- [시연영상](#시연영상-계정지갑연결)
+
+- [시연영상](#시연영상-등록 및 조회과정)
+
 
 # :book: 프로젝트 소개
 
@@ -81,45 +86,98 @@
   ![](/Doc/img/architecture.png)
 
 
-## 1. FE .env 설정 -->
 
 # :computer: 제공 기능 (Service)
 
 <div>
 <!-- 홈화면 이미지 -->
-<img src="/Doc/img/image02.png" alt="홈화면" width="189" height="378">
+<img src="/Doc/img/image02.png" alt="홈화면" width="200" height="400">
 
 <!-- 정보 등록 이미지 -->
-<img src="/Doc/img/image03.png" alt="음원업로드" width="189" height="378">
+<img src="/Doc/img/image03.png" alt="음원업로드" width="200" height="400">
 
 <!-- 정보 기입후 업로드 -->
-<img src="/Doc/img/image04.png" alt="마이페이지" width="189" height="378">
+<img src="/Doc/img/image04.png" alt="마이페이지" width="200" height="400">
+
 </div>
+
+사용자의 교육경력 및 개인정보를 입력할 수 있다. 
+
+인증서 업로드 버튼을 클릭하면 사용자의 트랜잭션 서명 이벤트가 발생한다. 
+
 
 <div>
 <!-- web3 wallet connect -->
-<img src="/Doc/img/image05.png" alt="가상화폐 지갑연결" width="189" height="378">
+<img src="/Doc/img/image05.png" alt="가상화폐 지갑연결" width="200" height="400">
 
-<img src="/Doc/img/image06.png" alt="가상화폐 지갑연결" width="189" height="378">
+<img src="/Doc/img/image06.png" alt="가상화폐 지갑연결" width="200" height="400">
 
-<img src="/Doc/img/image07.png" alt="가상화폐 지갑연결" width="189" height="378">
+<img src="/Doc/img/image07.png" alt="가상화폐 지갑연결" width="200" height="400">
 
 </div>
+
+가상화폐 지갑과 연결한다 이때 사용한 블록체인 네트워크는 ethereum goeril testnet이다.
+
+또한 사파리 혹은 크롬과 같은 웹 브라우저가 아닌 가상화폐 어플리케이션의 browser 탭에서 도메인에 접근해야한다.
+
+
 
 
 <div>
 <!-- 동적qr정보조회 -->
-<img src="/Doc/img/image17.png" alt="동적qr정보조회" width="189" height="378">
+<img src="/Doc/img/image17.png" alt="동적qr정보조회" width="200" height="400">
 
-<img src="/Doc/img/image18.png" alt="동적qr정보조회" width="189" height="378">
+<img src="/Doc/img/image18.png" alt="동적qr정보조회" width="200" height="400">
 
-<img src="/Doc/img/image19.png" alt="동적qr정보조회" width="189" height="378">
+<img src="/Doc/img/image19.png" alt="동적qr정보조회" width="200" height="400">
 
 </div>
 
+<div>
 
-### 음원 재생 SmartContract
+<img src="/Doc/img/image20.png" alt="동적qr정보조회" width="200" height="400">
+
+</div>
+
+블록체인에 기록된 정보를 불러온다. ipfs.infura에 기록된 정보를 불러온다.
+
+동적qr을 조회하면 사용자가 블록체인에 기록했던 정보를 조회할 수 있다.
+
+
+### SmartContract
 
 ```solidity
 // 예시 솔리디티 코드
 pragma solidity ^0.8.0;
+
+ function safeMint(address to, string memory uri) public onlyOwner {
+        uint256 tokenId = _tokenIdCounter.current();
+        _tokenIdCounter.increment();
+        _safeMint(to, tokenId);
+        _setTokenURI(tokenId, uri); 
+    }
+
+사용자의 정보를 기록할때 사진과 같은 메타정보를 기록하는경우 ipfs를 사용하여 정보를 업로드한다.
+
+    function tokenURI(uint256 tokenId)
+        public
+        view
+        override(ERC721, ERC721URIStorage)
+        returns (string memory)
+    {
+        return super.tokenURI(tokenId);
+    }
+
+사용자의 정보를 조회할때는 tokenId를 입력하여 ipfs에 기록된 정보를 조회한다.
+
+
+### 시연영상 - 계정지갑연결
+
+
+### 시연영상 - 등록 및 조회과정
+
+
+
+
+
+
