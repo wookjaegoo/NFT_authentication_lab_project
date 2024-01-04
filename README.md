@@ -17,15 +17,16 @@
     - [**BackEnd**](#backend)
     - [**Smart Contract**](#smart-contract)
     - [**Deploy**](#deploy)
-
-    - [Deploy :rocket:](#deploy-rocket)
     <!-- - [Connect](#connect) -->
 
 - [:computer: 제공 기능 (Service)](#computer-제공-기능-service)
 
+- [SmartContract](#SmartContract)
+
+
 - [시연영상](#시연영상-계정지갑연결)
 
-- [시연영상](#시연영상-등록 및 조회과정)
+- [후기](#프로젝트후기)
 
 
 # :book: 프로젝트 소개
@@ -171,16 +172,21 @@ pragma solidity ^0.8.0;
 사용자의 정보를 조회할때는 tokenId를 입력하여 ipfs에 기록된 정보를 조회한다.
 ```
 
-### 시연영상 - 계정지갑연결
+### 시연영상-계정지갑연결
 https://github.com/wookjaegoo/NFT_authentication_lab_project/assets/87640934/ff798681-9062-44ce-9ba8-dfef6720f2c8
-### 시연영상 - 등록과정
+### 시연영상-등록과정
 https://github.com/wookjaegoo/NFT_authentication_lab_project/assets/87640934/924a3ae5-7f07-4c83-ac2b-ff5a1ae20986
-### 시연영상 - 조회과정1
+### 시연영상-조회과정1
 https://github.com/wookjaegoo/NFT_authentication_lab_project/assets/87640934/e64e894f-00e1-42c9-977d-d1d8d76ce890
-### 시연영상 - 조회과정2
+### 시연영상-조회과정2
 https://github.com/wookjaegoo/NFT_authentication_lab_project/assets/87640934/df9d58a2-986d-4cbd-96cd-432ad3522b2e
 
 
+## 프로젝트후기
+walletconnectModal을 사용하여 모바일 반응형 웹에서 블록체인 네트워크와 통신할 수 있음을 깨달았다. 그러나 사용자 측면에서
+일반적인 검색엔진이 아닌 메타마스크와같은 가상화폐 어플리케이션에 탑재된 브라우저를 사용하여 도메인에 접근해야 하는 단점이 
+있다. 접근성이 매우 떨어지는 것을 느꼈으며 차라리 백엔드 단을 구성하여 사용자의 지갑 정보를 구성하는 것이 접근성을 낮출 것이라고 판단하였다.
+다음 프로젝트에서는 이더리움이 아닌 클레이튼 네트워크를 사용하고 사용자 지갑 정보를 갖춘 서버를 구성한 프로젝트를 진행할 것이다.
 
 
 
