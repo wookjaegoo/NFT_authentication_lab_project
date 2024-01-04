@@ -55,7 +55,7 @@
   ![](/Doc/img/flowchart2.png)
 
 # :wrench: 사용 기술 (Technique)
-  ![](/Doc/img/environment.png)
+  ![](/Doc/img/environment2.png)
 
 
 ### FrontEnd
