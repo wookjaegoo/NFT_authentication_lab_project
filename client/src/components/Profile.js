@@ -24,7 +24,7 @@ function Profile () {
   const [MDetail, setMdetail] = useState(false)
 
   const {
-    state: { contract, accounts, web3 }
+    state: { contract}
   } = useEth()
 
   const [au, auSwap] = useState(false)
