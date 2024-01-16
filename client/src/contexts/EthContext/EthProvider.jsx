@@ -1,4 +1,4 @@
-import React, { useReducer, useCallback, useEffect} from 'react'
+import React, { useReducer, useCallback, useEffect } from 'react'
 import Web3 from 'web3'
 import EthContext from './EthContext'
 import { reducer, actions, initialState } from './state'
@@ -6,7 +6,7 @@ import { EthereumClient, w3mConnectors, w3mProvider } from '@web3modal/ethereum'
 import { configureChains, createConfig } from 'wagmi'
 import { goerli } from 'wagmi/chains'
 
-let newjson = []
+const newjson = []
 
 export function EthProvider({ children }) {
   const [state, dispatch] = useReducer(reducer, initialState)
@@ -41,16 +41,16 @@ export function EthProvider({ children }) {
         address = artifact.networks[networkID].address
         contract = new web3.eth.Contract(abi, address)
 
-        let what = await contract.methods
+        const what = await contract.methods
           .tokenOfOwnerByIndex(accounts[0], 2)
           .call()
         console.log(what)
 
-        let max = await contract.methods.totalSupply().call()
+        const max = await contract.methods.totalSupply().call()
         for (let i = max - 1; i > 0; i--) {
           const Writer = await contract.methods.ownerOf(i).call()
 
-          if (Writer == accounts[0]) {
+          if (Writer === accounts[0]) {
             console.log(Writer)
             break
           }

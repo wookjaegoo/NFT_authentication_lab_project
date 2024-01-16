@@ -1,17 +1,16 @@
-import { useState, useCallback, useEffect } from 'react'
+import { useState, useEffect, React } from 'react'
 import { create } from 'ipfs-http-client'
-import React from 'react'
 import './Footer.css'
 import useEth from '../contexts/EthContext/useEth'
 import { Buffer } from 'buffer'
 import { TiChevronLeftOutline, TiChevronRightOutline } from 'react-icons/ti'
 import { EthereumClient, w3mConnectors, w3mProvider } from '@web3modal/ethereum'
-import { Web3Button } from '@web3modal/react'
+import { Web3Button, Web3Modal} from '@web3modal/react'
 import { configureChains, createConfig, WagmiConfig } from 'wagmi'
 import { goerli } from 'wagmi/chains'
 
 const projectId = '2L2d01In1I9OFbre81IirWt0szw'
-const projectSecret = '7c43815b40bc5ae32c34ad9d6db87dad'
+const projectSecret = ''
 const auth =
   'Basic ' + Buffer.from(projectId + ':' + projectSecret).toString('base64')
 
@@ -93,14 +92,14 @@ function Footer() {
     connectors: w3mConnectors({
       projectId: '251542da3c8552393e55d6d3b636127e',
       version: '1', // or "2"
-      chains,
+      chains
     }),
-    publicClient,
+    publicClient
   })
 
   const ethereumClient = new EthereumClient(wagmiConfig, chains)
 
-  async function howmany() {
+  async function howmany () {
     try {
       for (let i = 0; i < 100; i++) {
         await contract.methods.tokenURI(i).call()
@@ -116,15 +115,15 @@ function Footer() {
     console.log(yournumber)
   }, [])
 
-  async function onChange2(e) {
+  async function onChange2 (e) {
     const { value, name } = e.target
     setInputs({
-      ...inputs, 
-      [name]: value,
+      ...inputs,
+      [name]: value
     })
   }
 
-  async function onChangeprofile1(e) {
+  async function onChangeprofile1 (e) {
     const file = e.target.files[0]
 
     try {
@@ -139,7 +138,7 @@ function Footer() {
     }
   }
 
-  async function onChangeprofile2(e) {
+  async function onChangeprofile2 (e) {
     const file = e.target.files[0]
     try {
       const added = await client2.add(file)
@@ -153,8 +152,7 @@ function Footer() {
     }
   }
 
-
-  async function authentify3(e) {
+  async function authentify3 (e) {
     try {
       const json1 = `{"name":"${name1}","number":"${number}","institution":"${institution1}" 
     ,"guardian":"${guardian}","relationship":"${relationship}"
@@ -216,7 +214,6 @@ function Footer() {
       console.log(error)
     }
   }
-
 
   const CardGrade = () => (
     <div style={{ display: 'inline-block' }}>

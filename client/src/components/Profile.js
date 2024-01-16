@@ -7,24 +7,19 @@ function Profile () {
   const axios = require('axios').default
   const [yournumber, numset] = useState('')
   const [onChainUrl1, updateonChainUrl1] = useState('')
-
   const [onChainUrl2, updateonChainUrl2] = useState('')
   const [imageUrl, updateImageUrl] = useState('')
   const [imageUrl2, updateImageUrl2] = useState('')
-  // const [value, setValue] = useState("");
   const [isexist, setExist] = useState(false)
   const [swap, setswap] = useState(true)
   const [swap1, setswap1] = useState(true)
-
   const [gprivateDetail, setgdetail] = useState(false)
-
   const [jprivateDetail, setjdetail] = useState(false)
-
   const [ADetail, setAdetail] = useState(false)
   const [MDetail, setMdetail] = useState(false)
 
   const {
-    state: { contract}
+    state: { contract }
   } = useEth()
 
   const [au, auSwap] = useState(false)
@@ -126,30 +121,28 @@ function Profile () {
       if (count.current <= 0) {
         clearInterval(interval.current)
 
-        if (au && swap == true) {
+        if (au && swap === true) {
           setswap(false)
           getqr2()
-        } else if (au && swap == false) {
+        } else if (au && swap === false) {
           setswap(true)
           getqr()
         }
 
-        if (job && swap1 == true) {
+        if (job && swap1 === true) {
           setswap1(false)
           getqr4()
-        } else if (job && swap1 == false) {
+        } else if (job && swap1 === false) {
           setswap1(true)
           getqr3()
         }
       }
     }, [second])
 
-    // QR로직 수정하셈
-
     return <div>{second}</div>
   }
   const Gdetailset = () => {
-    if (gprivateDetail == true) {
+    if (gprivateDetail === true) {
       setgdetail(false)
     } else {
       setgdetail(true)
@@ -157,7 +150,7 @@ function Profile () {
   }
 
   const Jdetailset = () => {
-    if (jprivateDetail == true) {
+    if (jprivateDetail === true) {
       setjdetail(false)
     } else {
       setjdetail(true)
@@ -165,7 +158,7 @@ function Profile () {
   }
 
   const AuSwap = () => {
-    if (au == true) {
+    if (au === true) {
       auSwap(false)
     } else {
       auSwap(true)
@@ -173,7 +166,7 @@ function Profile () {
   }
 
   const JobSwap = () => {
-    if (job == true) {
+    if (job === true) {
       jobSwap(false)
     } else {
       getqr3()
@@ -182,7 +175,7 @@ function Profile () {
   }
 
   const Adetailset = () => {
-    if (ADetail == true) {
+    if (ADetail === true) {
       setAdetail(false)
     } else {
       setAdetail(true)
@@ -190,7 +183,7 @@ function Profile () {
   }
 
   const Mdetailset = () => {
-    if (MDetail == true) {
+    if (MDetail === true) {
       setMdetail(false)
     } else {
       setMdetail(true)

@@ -7,8 +7,6 @@ import Profile from './Profile'
 
 function Remoter({ props = [], trdata = [] }) {
   return (
-    //etheprovider 태그로 감싸야 state 값 정의가된다. 지금은 리모터에서 감은게 main
-    //profile제작했을때에도 적용이 되어야한다.
 
     <BrowserRouter>
       <NavBar />

@@ -1,12 +1,7 @@
 import React from 'react'
-import useEth from '../contexts/EthContext/useEth'
 import Profile from './Profile'
 
-function Main() {
-  const {
-    state: { newjson }
-  } = useEth()
-
+function Main () {
   return (
     <React.Fragment>
       <Profile />
