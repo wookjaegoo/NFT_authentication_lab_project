@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import './NavBar.css'
 import metadata from '../data/metadata.json'
 import { Link } from 'react-router-dom'
-import { Button } from './Button'
 
 const NavBar = () => {
   const [click, setClick] = useState(false)
@@ -37,13 +36,6 @@ const NavBar = () => {
         <i className={click ? 'fas fa-times' : 'fas fa-bars'} />
       </div>
       <ul className={click ? 'nav-menu active' : 'nav-menu'}>
-        {/* <li className='nav-item' style={{height:'50px',marginTop:'30px'}}>
-            <WagmiConfig client={wagmiClient}>
-            <Web3Button  />
-            </WagmiConfig>
-        <Web3Modal projectId="251542da3c8552393e55d6d3b636127e" ethereumClient={ethereumClient}/>
-
-                    </li> */}
 
         <li className="nav-item">
           <Link to="/Footer" className="nav-links" onClick={closeMobileMenu}>
@@ -57,7 +49,6 @@ const NavBar = () => {
           </Link>
         </li>
       </ul>
-      {/* {button && <Button buttonStyle='btn--outline'>SIGN UP</Button>} */}
     </div>
   )
 }

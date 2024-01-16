@@ -459,31 +459,6 @@ function Profile () {
           </div>
         )}
 
-        {/* {jprivateDetail&&  <div className='Authentication3' onClick={Jdetailset} >
-<h1 style={{marginLeft:'30px'}}>성명:{name2}</h1>
-<br></br>
-<h1 style={{marginLeft:'30px'}}>생년월일:{member2}</h1>
-<br></br>
-<h1 style={{marginLeft:'30px'}}>교육기관:{institution2}</h1>
-<br></br>
-<h1 style={{marginLeft:'30px'}}>교육날짜:{date2}</h1>
-<br></br>
-<h1 style={{marginLeft:'30px'}}>교육시간:{duration}</h1>
-<br></br>
-<h1 style={{marginLeft:'30px'}}>담당업무:{work}</h1>
-<br></br>
-<h1 style={{marginLeft:'30px'}}>교육내역:{education}</h1>
-<br></br>
-<h1 style={{marginLeft:'30px'}}>수상내역:{awards}</h1>
-<br></br>
-<h1 style={{marginLeft:'30px'}}>제출처:{submit2}</h1>
-<br></br>
-<h1 style={{marginLeft:'30px'}}>사용목적:{usage2}</h1>
-<br></br>
-<h1  style={{textAlign:'center'}} >클릭시 창이 닫힙니다</h1>
-</div>
-} */}
-
         {ADetail && (
           <div className="Authentication3" onClick={Adetailset}>
             <h1 style={{ marginLeft: '10px' }}>성명:{name2}</h1>
@@ -705,42 +680,6 @@ function Profile () {
   }
 
   async function getqr2 () {
-    //   try {
-
-    //     const Writer= await contract.methods.tokenURI(number).call();
-    //     console.log(Writer)
-    //     const response = await fetch(Writer);
-    //       if(!response.ok)
-    //       throw new Error(response.statusText);
-    //       const json = await response.json();
-
-    //       let gjson=json.links.loc[0].장애인인증서;
-    //       let jjson=json.links.loc[1].본인경력인증서;
-
-    //       const response1 = await fetch(gjson);
-    //       if(!response1.ok)
-    //       throw new Error(response1.statusText);
-    //       const json1 = await response1.json();
-
-    //       const response2 = await fetch(jjson);
-    //       if(!response2.ok)
-    //       throw new Error(response2.statusText);
-    //       const json2 = await response2.json();
-
-    //       let autsrc=json1.links.images[0].장애인인증서;
-    //       let autsrc1=json2.links.images[0].본인경력인증서;
-
-    //       updateonChainUrl1(json1);
-    //       updateonChainUrl1(json2);
-
-    //       updateImageUrl(autsrc);
-    //       updateImageUrl2(autsrc1);
-
-    // }
-
-    // catch (error) {
-    // }
-
     const options2 = {
       method: 'POST',
       url: 'https://qrtiger.com/api/campaign/edit/4XQU',
@@ -941,9 +880,6 @@ function Profile () {
       </div>
     )
   }
-
-  // 23/0101 추가할거 공증마크가 위변조 되어지지 않았다는것 그리고 pdf 혹은  png에서 원하는 정보 파싱하는거
-  // 후자부분은 표준화된 증명서가 있으면 가능할거같음 예시를들어서 내가 해야할 부분인거같다. 이거만 추가하면 완벽함
 
   return (
     <React.Fragment>

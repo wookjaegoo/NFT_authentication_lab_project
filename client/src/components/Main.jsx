@@ -1,11 +1,10 @@
 import React from 'react'
 import useEth from '../contexts/EthContext/useEth'
-import Footer from './Footer'
 import Profile from './Profile'
 
 function Main() {
   const {
-    state: { newjson },
+    state: { newjson }
   } = useEth()
 
   return (
