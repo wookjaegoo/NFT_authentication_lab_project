@@ -21,4 +21,10 @@ module.exports = function override(config) {
     }),
     new NodePolyfillPlugin()
   ])
+  config.experiments = {
+    topLevelAwait: true
+  }
+
+
+  return config
 }
