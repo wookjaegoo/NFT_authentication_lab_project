@@ -1,286 +1,189 @@
-import React, { useEffect, useState, useRef } from 'react'
-import './Profile.css'
-import useEth from '../contexts/EthContext/useEth'
-import { TiChevronLeftOutline, TiChevronRightOutline } from 'react-icons/ti'
+import React, { useEffect, useState, useRef } from 'react';
+import './Profile.css';
+import useEth from '../contexts/EthContext/useEth';
+import { TiChevronLeftOutline, TiChevronRightOutline } from 'react-icons/ti';
+import axios from 'axios';
 
-function Profile () {
-  const axios = require('axios').default
-  const [yournumber, numset] = useState('')
-  const [onChainUrl1, updateonChainUrl1] = useState('')
-  const [onChainUrl2, updateonChainUrl2] = useState('')
-  const [imageUrl, updateImageUrl] = useState('')
-  const [imageUrl2, updateImageUrl2] = useState('')
-  const [isexist, setExist] = useState(false)
-  const [swap, setswap] = useState(true)
-  const [swap1, setswap1] = useState(true)
-  const [gprivateDetail, setgdetail] = useState(false)
-  const [jprivateDetail, setjdetail] = useState(false)
-  const [ADetail, setAdetail] = useState(false)
-  const [MDetail, setMdetail] = useState(false)
+function Profile() {
+  const [state, setState] = useState({
+    yournumber: '',
+    onChainUrl1: '',
+    onChainUrl2: '',
+    imageUrl: '',
+    imageUrl2: '',
+    isexist: false,
+    swap: true,
+    swap1: true,
+    gprivateDetail: false,
+    jprivateDetail: false,
+    ADetail: false,
+    MDetail: false,
+    au: false,
+    job: false,
+    inputs: {
+      number: '',
+      name: '',
+      number1: '',
+      usage: '',
+      location: '',
+      date: '',
+      member: '',
+      severe: '',
+      dgrade: '',
+      guardian: '',
+      relationship: '',
+      duration: '',
+      work: '',
+      education: '',
+      awards: '',
+      institution: '',
+    },
+  });
 
-  const {
-    state: { contract }
-  } = useEth()
+  const { state: ethState } = useEth();
+  const { contract } = ethState;
 
-  const [au, auSwap] = useState(false)
-  const [job, jobSwap] = useState(false)
-  const [job2, jobSwap2] = useState(false)
+  const updateState = (updates) => {
+    setState((prevState) => ({ ...prevState, ...updates }));
+  };
 
-  const [inputs, setInputs] = useState({
-    number: '',
-    name: '',
-    number1: '',
-    usage: '',
-    location: '',
-    date: '',
-    member: '',
-    severe: '',
-    dgrade: '',
-    guardian: '',
-    relationship: '',
-    duration: '',
-    work: '',
-    education: '',
-    awards: '',
-    institution: ''
-  })
-  const { number } = inputs
+  const updateInputState = (updates) => {
+    setState((prevState) => ({
+      ...prevState,
+      inputs: { ...prevState.inputs, ...updates },
+    }));
+  };
 
-  const [name1, updateName1] = useState('')
-  const [name2, updateName2] = useState('')
-  const [number1, updatenumber] = useState('')
-  const [usage1, updateusage1] = useState('')
-  const [usage2, updateusage2] = useState('')
-  const [location, updateloc] = useState('')
-  const [date1, updatedate1] = useState('')
-  const [date2, updatedate2] = useState('')
-  const [member1, updatemember1] = useState('')
-  const [member2, updatemember2] = useState('')
-  const [severe, updatesvere] = useState('')
-  const [dgrade, updatedgrade] = useState('')
+  const howmany = async () => {
+    if (!contract) {
+      return;
+    }
 
-  const [guardian, updateguardian] = useState('')
-  const [relationship, updaterelationship] = useState('')
-  const [duration, updateduration] = useState('')
-  const [work, updatework] = useState('')
-
-  const [education, updateeducation] = useState('')
-  const [awards, updateawards] = useState('')
-  const [institution1, updateinstitution1] = useState('')
-
-  const [institution2, updateinstitution2] = useState('')
-  const [submit1, updatesubmit1] = useState('')
-  const [submit2, updatesubmit2] = useState('')
-
-  async function howmany () {
-    const num = await contract.methods.totalSupply().call()
     try {
+      const num = await contract.methods.totalSupply().call();
       for (let i = 0; i < num; i++) {
-        await contract.methods.tokenURI(i).call()
-        numset(i)
+        await contract.methods.tokenURI(i).call();
+        updateState({ yournumber: i });
       }
     } catch (error) {
-      console.log('마지막아이디1')
-      console.log(yournumber)
     }
-  }
-  useEffect(() => {
-    howmany()
-    console.log(yournumber)
-  }, [])
+  };
 
-  async function onChange3 (e) {
-    const { value, name } = e.target
-    setInputs({
-      ...inputs, // 기존의 input 객체를 복사한 뒤
-      [name]: value // name 키를 가진 값을 value 로 설정
-    })
-  }
+  useEffect(() => {
+    howmany();
+  }, [contract]);
+
+  const onChange3 = (e) => {
+    const { value, name } = e.target;
+    updateInputState({ [name]: value });
+  };
 
   const intToString = (num) => {
-    return String(num).padStart(2, '0')
-  }
+    return String(num).padStart(2, '0');
+  };
 
   const Timer = ({ ss }) => {
-    const SS = ss ? parseInt(ss) : 0
-
-    const count = useRef(SS)
-    const interval = useRef(null)
-
-    const [second, setSecond] = useState(intToString(SS))
+    const SS = ss ? parseInt(ss) : 0;
+    const count = useRef(SS);
+    const interval = useRef(null);
+    const [second, setSecond] = useState(intToString(SS));
 
     useEffect(() => {
       interval.current = setInterval(() => {
-        count.current -= 1
-
-        setSecond(intToString(count.current % 60))
-      }, 1000)
-    }, [])
+        count.current -= 1;
+        setSecond(intToString(count.current % 60));
+      }, 1000);
+    }, []);
 
     useEffect(() => {
       if (count.current <= 0) {
-        clearInterval(interval.current)
-
-        if (au && swap === true) {
-          setswap(false)
-          getqr2()
-        } else if (au && swap === false) {
-          setswap(true)
-          getqr()
+        clearInterval(interval.current);
+        if (state.au && state.swap) {
+          updateState({ swap: false });
+          getqr2();
+        } else if (state.au && !state.swap) {
+          updateState({ swap: true });
+          getqr();
         }
-
-        if (job && swap1 === true) {
-          setswap1(false)
-          getqr4()
-        } else if (job && swap1 === false) {
-          setswap1(true)
-          getqr3()
+        if (state.job && state.swap1) {
+          updateState({ swap1: false });
+          getqr4();
+        } else if (state.job && !state.swap1) {
+          updateState({ swap1: true });
+          getqr3();
         }
       }
-    }, [second])
+    }, [second]);
 
-    return <div>{second}</div>
-  }
-  const Gdetailset = () => {
-    if (gprivateDetail === true) {
-      setgdetail(false)
-    } else {
-      setgdetail(true)
-    }
-  }
+    return <div>{second}</div>;
+  };
 
-  const Jdetailset = () => {
-    if (jprivateDetail === true) {
-      setjdetail(false)
-    } else {
-      setjdetail(true)
-    }
-  }
+  const toggleDetail = (key) => {
+    updateState({ [key]: !state[key] });
+  };
 
-  const AuSwap = () => {
-    if (au === true) {
-      auSwap(false)
-    } else {
-      auSwap(true)
-    }
-  }
-
-  const JobSwap = () => {
-    if (job === true) {
-      jobSwap(false)
-    } else {
-      getqr3()
-      jobSwap(true)
-    }
-  }
-
-  const Adetailset = () => {
-    if (ADetail === true) {
-      setAdetail(false)
-    } else {
-      setAdetail(true)
-    }
-  }
-
-  const Mdetailset = () => {
-    if (MDetail === true) {
-      setMdetail(false)
-    } else {
-      setMdetail(true)
-    }
-  }
-
-  const MAX_VISIBILITY = 3
+  const MAX_VISIBILITY = 3;
 
   const CardGrade = () => (
     <div>
-      {!au && isexist && (
-        <div className="Authentication2" onClick={AuSwap}>
+      {!state.au && state.isexist && (
+        <div className="Authentication2" onClick={() => toggleDetail('au')}>
           <div className="dicbar" style={{ marginBottom: '-300px' }}>
-            <img src="logomy.png"></img>
+            <img src="logomy.png" alt="logo" />
           </div>
-          <h1
-            style={{ color: 'white', marginTop: '330px', textAlign: 'center' }}
-          >
+          <h1 style={{ color: 'white', marginTop: '330px', textAlign: 'center' }}>
             장애인 등급인증서
           </h1>
-
           <div className="prbottom2">
             <div style={{ textAlign: 'center', fontSize: '9px' }}>
-              <h2>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;성명&nbsp;&nbsp;:{name1}
-              </h2>
-              <h2>장애등급&nbsp;&nbsp;:{dgrade}&nbsp;&nbsp;&nbsp;&nbsp;</h2>
-              <h2>보호자명&nbsp;&nbsp;:{guardian}</h2>
-              <h2>
-                마지막 발급날짜&nbsp;&nbsp;:{date1}
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              </h2>
+              <h2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;성명&nbsp;&nbsp;:{state.inputs.name}</h2>
+              <h2>장애등급&nbsp;&nbsp;:{state.inputs.dgrade}&nbsp;&nbsp;&nbsp;&nbsp;</h2>
+              <h2>보호자명&nbsp;&nbsp;:{state.inputs.guardian}</h2>
+              <h2>마지막 발급날짜&nbsp;&nbsp;:{state.inputs.date}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h2>
             </div>
           </div>
         </div>
       )}
-      <CardGrade2></CardGrade2>
+      <CardGrade2 />
     </div>
-  )
+  );
 
   const CardGrade2 = () => (
     <div>
-      {au && (
+      {state.au && (
         <div className="Authentication2">
-          <h1 style={{ color: 'white', marginTop: '25%', fontSize: '40px' }}>
-            등급 인증서
-          </h1>
-
-          {swap && (
+          <h1 style={{ color: 'white', marginTop: '25%', fontSize: '40px' }}>등급 인증서</h1>
+          {state.swap && (
             <div>
-              <img
-                src="https://qrtiger.com/qr/YINX.png"
-                className="animatedimage"
-              ></img>
+              <img src="https://qrtiger.com/qr/YINX.png" className="animatedimage" alt="qr" />
             </div>
           )}
-
-          {!swap && (
+          {!state.swap && (
             <div>
-              <img
-                src="https://qrtiger.com/qr/4XQU.png"
-                className="animatedimage"
-              ></img>
+              <img src="https://qrtiger.com/qr/4XQU.png" className="animatedimage" alt="qr" />
             </div>
           )}
-
           <div>
             <div style={{ fontSize: 10, color: 'white' }}>
               <div>시간안에 인증해주세요</div>
-              <Timer ss="15"></Timer>
+              <Timer ss="15" />
               <div>[필수 제출 정보]</div>
               <span style={{ color: 'white', fontSize: '10px' }}>나이ᆞ</span>
-              <span style={{ color: 'white', fontSize: '10px' }}>
-                장애정도ᆞ
-              </span>
-
-              <span style={{ color: 'white', fontSize: '10px' }}>
-                취득일자ᆞ
-              </span>
+              <span style={{ color: 'white', fontSize: '10px' }}>장애정도ᆞ</span>
+              <span style={{ color: 'white', fontSize: '10px' }}>취득일자ᆞ</span>
               <span style={{ color: 'white', fontSize: '10px' }}>용도ᆞ</span>
               <span style={{ color: 'white', fontSize: '10px' }}>발급처 </span>
             </div>
           </div>
-
           <div style={{ textAlign: 'center', display: 'inline-block' }}>
-            <button
-              type="button"
-              onClick={Gdetailset}
-              style={{ height: '30px' }}
-            >
+            <button type="button" onClick={() => toggleDetail('gprivateDetail')} style={{ height: '30px' }}>
               상세보기
             </button>
             <button
               type="button"
               onClick={() =>
                 window.open(
-                  ` https://goerli.etherscan.io/token/0xa08af44a2e0c88d1f9e12dad8ece694c4ff779ea?a=${number}`,
+                  `https://goerli.etherscan.io/token/0xa08af44a2e0c88d1f9e12dad8ece694c4ff779ea?a=${state.inputs.number}`,
                   '_blank'
                 )
               }
@@ -288,109 +191,72 @@ function Profile () {
             >
               블록체인 기록
             </button>
-
-            <button
-              type="button"
-              onClick={() => window.open(`${imageUrl}`, '_blank')}
-              style={{ height: '30px' }}
-            >
+            <button type="button" onClick={() => window.open(state.imageUrl, '_blank')} style={{ height: '30px' }}>
               등급 인증서 사진
             </button>
           </div>
-
           <div className="prbottom2"></div>
         </div>
       )}
     </div>
-  )
+  );
 
   const CardJob = () => (
     <div>
-      {!job && isexist && (
-        <div className="Authentication2" onClick={JobSwap}>
+      {!state.job && state.isexist && (
+        <div className="Authentication2" onClick={() => toggleDetail('job')}>
           <div className="dicbar" style={{ marginBottom: '-300px' }}>
-            <img src="logomy.png"></img>
+            <img src="logomy.png" alt="logo" />
           </div>
-          <h1
-            style={{ color: 'white', marginTop: '300px', textAlign: 'center' }}
-          >
-            본인 교육경력 인증서
-          </h1>
-
+          <h1 style={{ color: 'white', marginTop: '300px', textAlign: 'center' }}>본인 교육경력 인증서</h1>
           <div className="prbottom2">
             <div style={{ textAlign: 'center', fontSize: '9px' }}>
-              <h2>&nbsp;성명&nbsp;&nbsp;:{name2}</h2>
-              <h2>생년월일&nbsp;&nbsp;:{member2}</h2>
-              <h2>
-                성인여부&nbsp;&nbsp;:성인&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              </h2>
+              <h2>&nbsp;성명&nbsp;&nbsp;:{state.inputs.name}</h2>
+              <h2>생년월일&nbsp;&nbsp;:{state.inputs.member}</h2>
+              <h2>성인여부&nbsp;&nbsp;:성인&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h2>
             </div>
           </div>
         </div>
       )}
-
-      <CardJob2></CardJob2>
+      <CardJob2 />
     </div>
-  )
+  );
 
-  // 클릭시 qr뜨게하는 함수
   const CardJob2 = () => (
     <div>
-      {job && (
+      {state.job && (
         <div className="Authentication2">
-          <h1 style={{ color: 'white', marginTop: '25%', fontSize: '30px' }}>
-            교육 경력 인증서
-          </h1>
-
-          {swap1 && (
+          <h1 style={{ color: 'white', marginTop: '25%', fontSize: '30px' }}>교육 경력 인증서</h1>
+          {state.swap1 && (
             <div>
-              <img
-                src="https://qrtiger.com/qr/E7NM.png"
-                className="animatedimage"
-              ></img>
+              <img src="https://qrtiger.com/qr/E7NM.png" className="animatedimage" alt="qr" />
             </div>
           )}
-
-          {!swap1 && (
+          {!state.swap1 && (
             <div>
-              <img
-                src="https://qrtiger.com/qr/4XQU.png"
-                className="animatedimage"
-              ></img>
+              <img src="https://qrtiger.com/qr/4XQU.png" className="animatedimage" alt="qr" />
             </div>
           )}
-
           <div>
             <div style={{ fontSize: 10, color: 'white' }}>
               <div>시간안에 인증해주세요</div>
-              <Timer ss="15"></Timer>
+              <Timer ss="15" />
               <div>[필수 제출 정보]</div>
               <span style={{ color: 'white', fontSize: '10px' }}>나이ᆞ</span>
-
-              <span style={{ color: 'white', fontSize: '10px' }}>
-                취득일자ᆞ
-              </span>
+              <span style={{ color: 'white', fontSize: '10px' }}>취득일자ᆞ</span>
               <span style={{ color: 'white', fontSize: '10px' }}>용도ᆞ</span>
-              <span style={{ color: 'white', fontSize: '10px' }}>
-                발급기관{' '}
-              </span>
+              <span style={{ color: 'white', fontSize: '10px' }}>발급기관 </span>
             </div>
           </div>
-
           <div style={{ textAlign: 'center', display: 'inline-block' }}>
-            <button
-              type="button"
-              onClick={Jdetailset}
-              style={{ height: '30px' }}
-            >
+            <button type="button" onClick={() => toggleDetail('jprivateDetail')} style={{ height: '30px' }}>
               상세보기
             </button>
-
             <button
               type="button"
               onClick={() =>
                 window.open(
-                  ` https://goerli.etherscan.io/token/0xa08af44a2e0c88d1f9e12dad8ece694c4ff779ea?a=${number}`,
+                  `https://goerli.etherscan.io/token/0xa08af44a2e0c88d1f9e12dad8ece694c4ff779ea?a=${state.inputs.number}`,
                   '_blank'
                 )
               }
@@ -403,116 +269,75 @@ function Profile () {
         </div>
       )}
     </div>
-  )
+  );
 
   const Carousel = ({ children }) => {
-    const [active, setActive] = useState(1)
-    const count = React.Children.count(children)
-    // active 는 카드 개수같은데
+    const [active, setActive] = useState(1);
+    const count = React.Children.count(children);
+
     useEffect(() => {
-      if (au) {
-        setActive(1)
-      } else if (job) {
-        setActive(0)
-      } else if (job2) {
-        setActive(2)
+      if (state.au) {
+        setActive(1);
+      } else if (state.job) {
+        setActive(0);
+      } else {
+        setActive(2);
       }
-    }, [])
+    }, [state.au, state.job]);
+
     return (
       <div className="carousel">
-        {gprivateDetail && (
-          <div className="Authentication3" onClick={Gdetailset}>
-            <h1 style={{ marginLeft: '30px' }}>성명:{name1}</h1>
-            <br></br>
-            <h1 style={{ marginLeft: '30px' }}>생년월일:{member1}</h1>
-            <br></br>
-            <h1 style={{ marginLeft: '30px' }}>발급기관:{institution1}</h1>
-            <br></br>
-            <h1 style={{ marginLeft: '30px' }}>발행날짜:{date1}</h1>
-            <br></br>
-            <h1 style={{ marginLeft: '30px' }}>보호자:{guardian}</h1>
-            <br></br>
-            <h1 style={{ marginLeft: '30px' }}>
-              보호자와의 관계:{relationship}
-            </h1>
-            <br></br>
-            <h1 style={{ marginLeft: '30px' }}>등록번호:{number1}</h1>
-            <br></br>
-            <h1 style={{ marginLeft: '30px' }}>장애등급:{dgrade}</h1>
-            <br></br>
-            <h1 style={{ marginLeft: '30px' }}>중증여부:{severe}</h1>
-            <br></br>
-            <h1 style={{ marginLeft: '30px' }}>소재지:{location}</h1>
-            <br></br>
-            <h1 style={{ marginLeft: '30px' }}>제출처:{submit1}</h1>
-            <br></br>
-            <h1 style={{ marginLeft: '30px' }}>사용목적:{usage1}</h1>
-            <br></br>
+        {state.gprivateDetail && (
+          <div className="Authentication3" onClick={() => toggleDetail('gprivateDetail')}>
+            <h1 style={{ marginLeft: '30px' }}>성명:{state.inputs.name}</h1>
+            <h1 style={{ marginLeft: '30px' }}>생년월일:{state.inputs.member}</h1>
+            <h1 style={{ marginLeft: '30px' }}>발급기관:{state.inputs.institution}</h1>
+            <h1 style={{ marginLeft: '30px' }}>발행날짜:{state.inputs.date}</h1>
+            <h1 style={{ marginLeft: '30px' }}>보호자:{state.inputs.guardian}</h1>
+            <h1 style={{ marginLeft: '30px' }}>보호자와의 관계:{state.inputs.relationship}</h1>
+            <h1 style={{ marginLeft: '30px' }}>등록번호:{state.inputs.number1}</h1>
+            <h1 style={{ marginLeft: '30px' }}>장애등급:{state.inputs.dgrade}</h1>
+            <h1 style={{ marginLeft: '30px' }}>중증여부:{state.inputs.severe}</h1>
+            <h1 style={{ marginLeft: '30px' }}>소재지:{state.inputs.location}</h1>
+            <h1 style={{ marginLeft: '30px' }}>제출처:{state.inputs.submit}</h1>
+            <h1 style={{ marginLeft: '30px' }}>사용목적:{state.inputs.usage}</h1>
             <h1 style={{ textAlign: 'center' }}>클릭시 창이 닫힙니다</h1>
           </div>
         )}
-
-        {ADetail && (
-          <div className="Authentication3" onClick={Adetailset}>
-            <h1 style={{ marginLeft: '10px' }}>성명:{name2}</h1>
-            <br></br>
-            <h1 style={{ marginLeft: '10px' }}>교육기관:{institution2}</h1>
-            <br></br>
+        {state.ADetail && (
+          <div className="Authentication3" onClick={() => toggleDetail('ADetail')}>
+            <h1 style={{ marginLeft: '10px' }}>성명:{state.inputs.name}</h1>
+            <h1 style={{ marginLeft: '10px' }}>교육기관:{state.inputs.institution}</h1>
             <h1 style={{ marginLeft: '10px' }}>
-              미술교육날짜:{date2}
+              미술교육날짜:{state.inputs.date}
               <button
                 type="button"
-                onClick={() => window.open(`${imageUrl2}`, '_blank')}
+                onClick={() => window.open(state.imageUrl2, '_blank')}
                 style={{ height: '30px', width: '100px', textAlign: 'center' }}
               >
                 증빙자료
               </button>
             </h1>
-            <br></br>
-            <h1 style={{ marginLeft: '10px' }}>미술교육날짜:20180913</h1>
-            <br></br>
-            <h1 style={{ marginLeft: '10px' }}>미술교육날짜:20210304</h1>
           </div>
         )}
-
-        {MDetail && (
-          <div className="Authentication3" onClick={Mdetailset}>
-            <h1 style={{ marginLeft: '10px' }}>성명:{name2}</h1>
-            <br></br>
-            <h1 style={{ marginLeft: '10px' }}>교육기관:{institution2}</h1>
-            <br></br>
-            <h1 style={{ marginLeft: '10px' }}>음악교육날짜:{date2}</h1>
-            <br></br>
-            <h1 style={{ marginLeft: '10px' }}>음악교육날짜:20200519</h1>
-            <br></br>
-            <h1 style={{ marginLeft: '10px' }}>음악교육날짜:20180723</h1>
+        {state.MDetail && (
+          <div className="Authentication3" onClick={() => toggleDetail('MDetail')}>
+            <h1 style={{ marginLeft: '10px' }}>성명:{state.inputs.name}</h1>
+            <h1 style={{ marginLeft: '10px' }}>교육기관:{state.inputs.institution}</h1>
+            <h1 style={{ marginLeft: '10px' }}>음악교육날짜:{state.inputs.date}</h1>
           </div>
         )}
-
-        {jprivateDetail && (
-          <div
-            className="Authentication3"
-            onClick={Jdetailset}
-            style={{ display: 'inline-block', textAlign: 'center' }}
-          >
-            <button
-              style={{ marginTop: '50%', width: '100px', height: '30px' }}
-              onClick={Adetailset}
-            >
+        {state.jprivateDetail && (
+          <div className="Authentication3" onClick={() => toggleDetail('jprivateDetail')} style={{ textAlign: 'center' }}>
+            <button style={{ marginTop: '50%', width: '100px', height: '30px' }} onClick={() => toggleDetail('ADetail')}>
               미술
             </button>
-            <button
-              style={{ marginTop: '50%', width: '100px', height: '30px' }}
-              onClick={Mdetailset}
-            >
+            <button style={{ marginTop: '50%', width: '100px', height: '30px' }} onClick={() => toggleDetail('MDetail')}>
               음악
             </button>
-            <br></br>
-            <br></br>
             <h1 style={{ textAlign: 'center' }}>클릭시 창이 닫힙니다</h1>
           </div>
         )}
-
         {React.Children.map(children, (child, i) => (
           <div
             className="card-container"
@@ -524,102 +349,104 @@ function Profile () {
               '--abs-offset': Math.abs(active - i) / 4,
               'pointer-events': active === i ? 'auto' : 'none',
               opacity: Math.abs(active - i) >= MAX_VISIBILITY ? '0' : '1',
-              display: Math.abs(active - i) > MAX_VISIBILITY ? 'none' : 'block'
+              display: Math.abs(active - i) > MAX_VISIBILITY ? 'none' : 'block',
             }}
           >
             {child}
           </div>
         ))}
-
-        {isexist && active > 0 && (
+        {state.isexist && active > 0 && (
           <button
             className="nav left"
             onClick={() => {
-              setActive((i) => i - 1)
-              auSwap(false)
+              setActive((i) => i - 1);
+              updateState({ au: false });
             }}
           >
             <TiChevronLeftOutline />
           </button>
         )}
-        {isexist && active < count - 1 && (
+        {state.isexist && active < count - 1 && (
           <button
             className="nav right"
             onClick={() => {
-              setActive((i) => i + 1)
-              jobSwap(false)
-              auSwap(false)
+              setActive((i) => i + 1);
+              updateState({ job: false, au: false });
             }}
           >
             <TiChevronRightOutline />
           </button>
         )}
       </div>
-    )
-  }
+    );
+  };
 
-  async function getqr () {
+  const getqr = async () => {
     try {
-      const Writer = await contract.methods.tokenURI(number).call()
-      console.log(Writer)
+      const Writer = await contract.methods.tokenURI(state.inputs.number).call();
+      const response = await fetch(Writer);
+      if (!response.ok) throw new Error(response.statusText);
+      const json = await response.json();
 
-      const response = await fetch(Writer)
-      if (!response.ok) throw new Error(response.statusText)
-      const json = await response.json()
+      const gjson = json.links.loc[0].장애인인증서;
+      const jjson = json.links.loc[1].본인경력인증서;
 
-      const gjson = json.links.loc[0].장애인인증서
-      const jjson = json.links.loc[1].본인경력인증서
+      const response1 = await fetch(gjson);
+      if (!response1.ok) throw new Error(response1.statusText);
+      const json1 = await response1.json();
 
-      const response1 = await fetch(gjson)
-      if (!response1.ok) throw new Error(response1.statusText)
-      const json1 = await response1.json()
+      const response2 = await fetch(jjson);
+      if (!response2.ok) throw new Error(response2.statusText);
+      const json2 = await response2.json();
 
-      const response2 = await fetch(jjson)
-      if (!response2.ok) throw new Error(response2.statusText)
-      const json2 = await response2.json()
+      const autsrc = json1.links.images[0].장애인인증서;
+      const autsrc1 = json2.links.images[0].본인경력인증서;
 
-      const autsrc = json1.links.images[0].장애인인증서
-      const autsrc1 = json2.links.images[0].본인경력인증서
+      updateState({
+        yournumber: json1.number,
+        imageUrl: autsrc,
+        imageUrl2: autsrc1,
+        onChainUrl1: gjson,
+        onChainUrl2: jjson,
+        isexist: true,
+        inputs: {
+          ...state.inputs,
+          name: json1.name,
+          usage: json1.usage,
+          location: json1.location,
+          date: json1.date,
+          member: json1.member,
+          severe: json1.severe,
+          dgrade: json1.dgrade,
+          institution: json1.institution,
+          guardian: json1.guardian,
+          relationship: json1.relationship,
+          submit: json1.submit,
+        },
+      });
 
-      updatenumber(json1.number)
-      updateName1(json1.name)
-      updateusage1(json1.usage)
-      updateloc(json1.location)
-      updatedate1(json1.date)
-      updatemember1(json1.member)
-      updatesvere(json1.severe)
-      updatedgrade(json1.dgrade)
-      updateinstitution1(json1.institution)
-      updateguardian(json1.guardian)
-      updaterelationship(json1.relationship)
-      updatesubmit1(json1.submit)
-
-      updateName2(json2.name)
-      updateusage2(json2.usage)
-      updateduration(json2.duration)
-      updatework(json2.work)
-      updateeducation(json2.education)
-      updateawards(json2.awards)
-      updateinstitution2(json2.institution)
-      updatesubmit2(json2.submit)
-      updatedate2(json2.date)
-      updatemember2(json2.member)
-
-      updateonChainUrl1(gjson)
-      updateonChainUrl2(jjson)
-
-      updateImageUrl(autsrc)
-      updateImageUrl2(autsrc1)
+      updateInputState({
+        name: json2.name,
+        usage: json2.usage,
+        duration: json2.duration,
+        work: json2.work,
+        education: json2.education,
+        awards: json2.awards,
+        institution: json2.institution,
+        submit: json2.submit,
+        date: json2.date,
+        member: json2.member,
+      });
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-    // edit qr url code
+
     const options1 = {
       method: 'POST',
       url: 'https://qrtiger.com/api/campaign/edit/YINX',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: 'Bearer 4c65ef80-84fb-11ed-88f6-3fe97310821f'
+        Authorization: 'Bearer 4c65ef80-84fb-11ed-88f6-3fe97310821f',
       },
       data: {
         qr: {
@@ -632,53 +459,50 @@ function Profile () {
           backgroundColor: 'rgb(255,255,255)',
           transparentBkg: false,
           qrCategory: 'url',
-          text: 'https://www.qrcode-tiger.com.com/'
+          text: 'https://www.qrcode-tiger.com.com/',
         },
-        qrUrl: `${onChainUrl1}`,
+        qrUrl: `${state.onChainUrl1}`,
         qrType: 'qr2',
-        qrCategory: 'url'
-      }
-    }
+        qrCategory: 'url',
+      },
+    };
 
     axios
       .request(options1)
-      .then(function (response) {
-        console.log(response.data)
+      .then((response) => {
+        console.log(response.data);
       })
-      .catch(function (error) {
-        console.error(error)
-      })
+      .catch((error) => {
+        console.error(error);
+      });
 
-    // 불러오기 데이터 QR로
     const options = {
       method: 'GET',
       url: 'https://qrtiger.com/data/YINX',
       params: { period: 'month', tz: 'Asia/Singapore' },
       headers: {
         'Content-Type': 'application/json',
-        Authorization: 'Bearer 4c65ef80-84fb-11ed-88f6-3fe97310821f'
-      }
-    }
+        Authorization: 'Bearer 4c65ef80-84fb-11ed-88f6-3fe97310821f',
+      },
+    };
 
     axios
       .request(options)
-      .then(function (response) {
-        console.log(response.data)
+      .then((response) => {
+        console.log(response.data);
       })
-      .catch(function (error) {
-        console.error(error)
-      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
 
-    setExist(true)
-  }
-
-  async function getqr2 () {
+  const getqr2 = async () => {
     const options2 = {
       method: 'POST',
       url: 'https://qrtiger.com/api/campaign/edit/4XQU',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: 'Bearer 4c65ef80-84fb-11ed-88f6-3fe97310821f'
+        Authorization: 'Bearer 4c65ef80-84fb-11ed-88f6-3fe97310821f',
       },
       data: {
         qr: {
@@ -691,22 +515,22 @@ function Profile () {
           backgroundColor: 'rgb(255,255,255)',
           transparentBkg: false,
           qrCategory: 'url',
-          text: 'https://www.qrcode-tiger.com.com/'
+          text: 'https://www.qrcode-tiger.com.com/',
         },
-        qrUrl: `${onChainUrl1}`,
+        qrUrl: `${state.onChainUrl1}`,
         qrType: 'qr2',
-        qrCategory: 'url'
-      }
-    }
+        qrCategory: 'url',
+      },
+    };
 
     axios
       .request(options2)
-      .then(function (response) {
-        console.log(response.data)
+      .then((response) => {
+        console.log(response.data);
       })
-      .catch(function (error) {
-        console.error(error)
-      })
+      .catch((error) => {
+        console.error(error);
+      });
 
     const options3 = {
       method: 'GET',
@@ -714,27 +538,27 @@ function Profile () {
       params: { period: 'month', tz: 'Asia/Singapore' },
       headers: {
         'Content-Type': 'application/json',
-        Authorization: 'Bearer 4c65ef80-84fb-11ed-88f6-3fe97310821f'
-      }
-    }
+        Authorization: 'Bearer 4c65ef80-84fb-11ed-88f6-3fe97310821f',
+      },
+    };
 
     axios
       .request(options3)
-      .then(function (response) {
-        console.log(response.data)
+      .then((response) => {
+        console.log(response.data);
       })
-      .catch(function (error) {
-        console.error(error)
-      })
-  }
+      .catch((error) => {
+        console.error(error);
+      });
+  };
 
-  async function getqr3 () {
+  const getqr3 = async () => {
     const options1 = {
       method: 'POST',
       url: 'https://qrtiger.com/api/campaign/edit/E7NM',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: 'Bearer 4c65ef80-84fb-11ed-88f6-3fe97310821f'
+        Authorization: 'Bearer 4c65ef80-84fb-11ed-88f6-3fe97310821f',
       },
       data: {
         qr: {
@@ -747,22 +571,22 @@ function Profile () {
           backgroundColor: 'rgb(255,255,255)',
           transparentBkg: false,
           qrCategory: 'url',
-          text: 'https://www.qrcode-tiger.com.com/'
+          text: 'https://www.qrcode-tiger.com.com/',
         },
-        qrUrl: `${onChainUrl2}`,
+        qrUrl: `${state.onChainUrl2}`,
         qrType: 'qr2',
-        qrCategory: 'url'
-      }
-    }
+        qrCategory: 'url',
+      },
+    };
 
     axios
       .request(options1)
-      .then(function (response) {
-        console.log(response.data)
+      .then((response) => {
+        console.log(response.data);
       })
-      .catch(function (error) {
-        console.error(error)
-      })
+      .catch((error) => {
+        console.error(error);
+      });
 
     const options = {
       method: 'GET',
@@ -770,27 +594,27 @@ function Profile () {
       params: { period: 'month', tz: 'Asia/Singapore' },
       headers: {
         'Content-Type': 'application/json',
-        Authorization: 'Bearer 4c65ef80-84fb-11ed-88f6-3fe97310821f'
-      }
-    }
+        Authorization: 'Bearer 4c65ef80-84fb-11ed-88f6-3fe97310821f',
+      },
+    };
 
     axios
       .request(options)
-      .then(function (response) {
-        console.log(response.data)
+      .then((response) => {
+        console.log(response.data);
       })
-      .catch(function (error) {
-        console.error(error)
-      })
-  }
+      .catch((error) => {
+        console.error(error);
+      });
+  };
 
-  async function getqr4 () {
+  const getqr4 = async () => {
     const options2 = {
       method: 'POST',
       url: 'https://qrtiger.com/api/campaign/edit/4XQU',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: 'Bearer 4c65ef80-84fb-11ed-88f6-3fe97310821f'
+        Authorization: 'Bearer 4c65ef80-84fb-11ed-88f6-3fe97310821f',
       },
       data: {
         qr: {
@@ -803,22 +627,22 @@ function Profile () {
           backgroundColor: 'rgb(255,255,255)',
           transparentBkg: false,
           qrCategory: 'url',
-          text: 'https://www.qrcode-tiger.com.com/'
+          text: 'https://www.qrcode-tiger.com.com/',
         },
-        qrUrl: `${onChainUrl2}`,
+        qrUrl: `${state.onChainUrl2}`,
         qrType: 'qr2',
-        qrCategory: 'url'
-      }
-    }
+        qrCategory: 'url',
+      },
+    };
 
     axios
       .request(options2)
-      .then(function (response) {
-        console.log(response.data)
+      .then((response) => {
+        console.log(response.data);
       })
-      .catch(function (error) {
-        console.error(error)
-      })
+      .catch((error) => {
+        console.error(error);
+      });
 
     const options3 = {
       method: 'GET',
@@ -826,64 +650,60 @@ function Profile () {
       params: { period: 'month', tz: 'Asia/Singapore' },
       headers: {
         'Content-Type': 'application/json',
-        Authorization: 'Bearer 4c65ef80-84fb-11ed-88f6-3fe97310821f'
-      }
-    }
+        Authorization: 'Bearer 4c65ef80-84fb-11ed-88f6-3fe97310821f',
+      },
+    };
 
     axios
       .request(options3)
-      .then(function (response) {
-        console.log(response.data)
+      .then((response) => {
+        console.log(response.data);
       })
-      .catch(function (error) {
-        console.error(error)
-      })
-  }
+      .catch((error) => {
+        console.error(error);
+      });
+  };
 
-  function authentifier () {
-    return (
-      <div className="Profile">
-        {!isexist && (
-          <div className="Authentication">
-            <div className="dicbar" style={{ marginBottom: '-300px' }}>
-              <img src="logomy.png"></img>
-            </div>
-            <div className="contained">
-              <h1 style={{ color: 'white' }}>마지막 토큰아이디:{yournumber}</h1>
-              <h1>인증서확인</h1>
-              <label>토큰번호입력</label>
-
-              <div style={{ textAlign: 'center' }}>
-                <input
-                  name="number"
-                  value={number}
-                  onChange={onChange3}
-                  style={{ width: '50px', textAlign: 'center' }}
-                ></input>
-                <br />
-                <button onClick={getqr} style={{ width: '50px' }}>
-                  확인
-                </button>
-                <br />
-              </div>
-            </div>
-            <div className="prbottom"></div>
+  const authentifier = () => (
+    <div className="Profile">
+      {!state.isexist && (
+        <div className="Authentication">
+          <div className="dicbar" style={{ marginBottom: '-300px' }}>
+            <img src="logomy.png" alt="logo" />
           </div>
-        )}
-      </div>
-    )
-  }
+          <div className="contained">
+            <h1 style={{ color: 'white' }}>마지막 토큰아이디:{state.yournumber}</h1>
+            <h1>인증서확인</h1>
+            <label>토큰번호입력</label>
+            <div style={{ textAlign: 'center' }}>
+              <input
+                name="number"
+                value={state.inputs.number}
+                onChange={onChange3}
+                style={{ width: '50px', textAlign: 'center' }}
+              />
+              <br />
+              <button onClick={getqr} style={{ width: '50px' }}>
+                확인
+              </button>
+              <br />
+            </div>
+          </div>
+          <div className="prbottom"></div>
+        </div>
+      )}
+    </div>
+  );
 
   return (
     <React.Fragment>
       {authentifier()}
       <Carousel>
-        <CardJob></CardJob>
-
-        <CardGrade></CardGrade>
+        <CardJob />
+        <CardGrade />
       </Carousel>
     </React.Fragment>
-  )
+  );
 }
 
-export default Profile
+export default Profile;
